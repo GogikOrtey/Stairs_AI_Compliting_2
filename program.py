@@ -1,0 +1,22 @@
+# print("Helloy world!")
+
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
+import numpy as np
+
+# Загрузка модели
+model = load_model('stairs_model.h5')
+
+# Загрузка и изменение размера изображения
+img = image.load_img('input_AI_image.png', target_size=(200, 300))
+img_array = image.img_to_array(img)
+img_array = np.expand_dims(img_array, axis=0)
+
+# Нормализация данных
+img_array /= 255.0
+
+# Получение предсказания от нейросети
+prediction = model.predict(img_array)
+
+# Вывод результата
+print(f'Model prediction: {prediction[0][0]}')
