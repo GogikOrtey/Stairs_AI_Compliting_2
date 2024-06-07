@@ -1,8 +1,11 @@
-# print("Helloy world!")
-
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import numpy as np
+import sys
+
+# Установка кодировки консоли на UTF-8
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
 
 # Загрузка модели
 model = load_model('stairs_model.h5')
