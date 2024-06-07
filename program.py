@@ -1,5 +1,6 @@
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
+from tensorflow.keras.layers import TFSMLayer
 import numpy as np
 import sys
 
@@ -8,7 +9,17 @@ if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
 # Загрузка модели
-model = load_model('stairs_model.h5')
+# model = load_model('stairs_model.h5')
+# model = load_model('stairs_model_3.h5')
+
+# Путь к папке SavedModel
+model_directory = 'stairs_model_3'
+
+# Загрузка модели из папки SavedModel
+# model = load_model(model_directory)
+
+# Загрузка модели как слоя для вывода
+model = TFSMLayer(model_directory, call_endpoint='serving_default')
 
 # Загрузка и изменение размера изображения
 img = image.load_img('input_AI_image.png', target_size=(200, 300))
